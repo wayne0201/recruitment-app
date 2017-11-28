@@ -1,15 +1,19 @@
 import axios from 'axios';
-
+import { getRedirectPath } from "../util";
+ 
 const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 const ERROR_MSG = "ERROR_MSG";
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOAD_DATA = "LOAD_DATA"; 
+
 const initState = {
+    redirectTo: '',
     isAuth: false,
     msg: '',
     user: '',
     pwd: '',
     type: '',
 }
-// const 
  
 
 //reducer
@@ -19,8 +23,22 @@ export function user(state = initState, action) {
             return {
                 ...state,
                 ...action.payload,
+                redirectTo: getRedirectPath(action.payload),
                 msg: '',
                 isAuth: true
+            }
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                ...action.payload,
+                redirectTo: getRedirectPath(action.payload),
+                msg: '',
+                isAuth: true
+            }
+        case LOAD_DATA: 
+            return {
+                ...state,
+                ...action.payload
             }
         case ERROR_MSG:
             return {
@@ -36,6 +54,13 @@ export function user(state = initState, action) {
 function regisgerSuccess(data) {
     return {
         type: REGISTER_SUCCESS, 
+        payload: data
+    }
+}
+
+function  loginSuccess(data) {
+    return {
+        type: LOGIN_SUCCESS,
         payload: data
     }
 }
@@ -65,4 +90,27 @@ export function regisger({user, pwd, repeatpwd, type}) {
             }) 
     }
     
+}
+
+export function login({user, pwd}) {
+    if (!user || !pwd) {
+        return errorMsg('请输入用户名密码');
+    } 
+    return dispatch => {
+        axios.post('/user/login', { user, pwd })
+            .then(res => {
+                if (res.status === 200 && res.data.code === 0) {
+                    dispatch(loginSuccess(res.data.data))
+                } else {
+                    dispatch(errorMsg(res.data.msg))
+                }
+            })
+    }
+}
+
+export function loadData(userinfo) {
+    return {
+        type: LOAD_DATA,
+        payload: userinfo
+    }
 }

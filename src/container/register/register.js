@@ -1,4 +1,5 @@
 import React,{ Component } from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import { WhiteSpace, Button, List, InputItem, Radio } from "antd-mobile";
 
@@ -30,18 +31,16 @@ class Register extends Component{
     }
     handleRegister () {
         this.props.regisger(this.state)
-        console.log(this.state)
     }
     render(){
         const RadioItem = Radio.RadioItem;
         return(
             <div>
+                {this.props.redirectTo ? <Redirect to={this.props.redirectTo}></Redirect> : null}
                 <Loge></Loge>
                 <h2>注册页面</h2>
                 <List>
-                    {
-                        this.props.msg ? (<p className="error-msg">{this.props.msg}</p>) : null
-                    }
+                    {this.props.msg ? (<p className="error-msg">{this.props.msg}</p>) : null}
                     <InputItem
                         onChange = {(v) => this.handleChange('user', v)}
                         >用户</InputItem>
