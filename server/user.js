@@ -16,6 +16,26 @@ Router.get('/list', function(req, res) {
     })
 })
 
+Router.post('/updata', function (req, res) {
+    const { u_id } = req.cookies;
+    if (!u_id) {
+        return res.json({
+            code: 1
+        });
+    }
+    const body = req.body;
+    User.findByIdAndUpdate(u_id, body, function (err, doc) {
+        const data = Object.assign({}, {
+            user: doc.user,
+            type: doc.type,
+        }, body)
+        return res.json({
+            code: 0,
+            data
+        })
+    })
+})
+
 Router.post('/login', function (req, res) {
     const { user, pwd } = req.body;
     User.findOne({ user, pwd: md5pwd(pwd) }, _filer, function (err, doc) {
@@ -63,6 +83,8 @@ Router.post('/register', function (req, res) {
         })
     })
 })
+
+
 
 Router.get('/info', function (req, res) {
     const { u_id } = req.cookies;
