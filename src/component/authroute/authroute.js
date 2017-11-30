@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
     }
 )
 class AuthRoute extends Component {
-    componentDidMount() {
+    componentWillMount() {
         const pulicList = ['/login', '/register'];
         const pathname = this.props.location.pathname;
         if(~pulicList.indexOf(pathname)){

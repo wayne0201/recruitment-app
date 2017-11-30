@@ -8,3 +8,8 @@ export function getRedirectPath({ type, avatar}) {
     }
     return url;
 }
+
+
+export function randomKey() {
+    return Math.random().toString(36).substring(2);
+}

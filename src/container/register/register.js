@@ -20,7 +20,7 @@ class Register extends Component{
             user: '',
             pwd: '',
             repeatpwd: '',
-            type: "genuis"
+            type: "genius"
         }
         this.handleRegister = this.handleRegister.bind(this)
     }
@@ -53,8 +53,8 @@ class Register extends Component{
                             onChange = {(v) => this.handleChange('repeatpwd', v)}
                             >确认密码</InputItem>
                         <RadioItem 
-                            checked = {this.state.type === 'genuis'}
-                            onChange = {() => this.handleChange('type', 'genuis')}
+                            checked = {this.state.type === 'genius'}
+                            onChange = {() => this.handleChange('type', 'genius')}
                             >牛人</RadioItem>
                         <RadioItem 
                             checked = {this.state.type === 'boss'}

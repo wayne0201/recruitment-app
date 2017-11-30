@@ -8,10 +8,10 @@ import { BrowserRouter, Route, Switch} from "react-router-dom";
 
 import Register from './container/register/register';
 import Login from './container/login/login';
-import Boss from './container/boss/boss';
 import BossInfo from './container/bossinfo/bossinfo';
 import GeniusInfo from './container/geniusinfo/geniusinfo';
 import AuthRoute from './component/authroute/authroute';
+import Dashboard from './component/dashboard/dashboard';
 
 import reducer from "./reducer";
 import "./config";
@@ -32,6 +32,7 @@ ReactDom.render(
                     <Route path='/bossinfo' component={BossInfo}></Route>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/register' component={Register}></Route>
+                    <Route component={Dashboard}></Route>
                 </Switch>
             </div>
         </BrowserRouter>
