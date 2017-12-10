@@ -10,13 +10,13 @@ import UserCard from "../usercard/usercard";
         getUserList
     }
 )
-class Boss extends Component {
+class Genius extends Component {
     componentDidMount() {
-        this.props.getUserList("genius")
+        this.props.getUserList("boss");
     }
     render() {
-        return < UserCard userlist = { this.props.userlist } ></UserCard >
+        return <UserCard userlist={this.props.userlist}></UserCard>
     }
 }
 
-export default Boss 
+export default Genius 
