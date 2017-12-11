@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { WhiteSpace, Button, WingBlank, List, InputItem } from "antd-mobile";
 import { connect } from "react-redux";
 
+import iForm from "../../component/i-form/i-form";
 import Loge from "../../component/logo/logo";
 import { login } from "../../redux/user.redux";
 
@@ -12,13 +13,10 @@ import { login } from "../../redux/user.redux";
         login
     }
 )
+@iForm
 class Login extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            user: '',
-            pwd: ''
-        }
         this.register = this.register.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
     }
@@ -26,12 +24,7 @@ class Login extends Component{
         this.props.history.push('/register')
     }
     handleLogin() {
-        this.props.login(this.state);
-    }
-    handleChange(key, val) {
-        this.setState({
-            [key]: val
-        })
+        this.props.login(this.props.state);
     }
     render(){
         return(
@@ -42,11 +35,11 @@ class Login extends Component{
                     <List>
                         {this.props.msg ? (<p className="error-msg">{this.props.msg}</p>) : null}
                         <InputItem
-                            onChange={(v) => this.handleChange('user', v)}
+                            onChange={(v) => this.props.handleChange('user', v)}
                             >用户</InputItem>
                         <InputItem
                             type="password"
-                            onChange={(v) => this.handleChange('pwd', v)}
+                            onChange={(v) => this.props.handleChange('pwd', v)}
                         >密码</InputItem>
                     </List>
                     <WhiteSpace />
