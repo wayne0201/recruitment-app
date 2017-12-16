@@ -7,6 +7,8 @@ import Boss from "../boss/boss";
 import Genius from "../genius/genius";
 import User from "../user/user";
 
+import { getMsgList, recvMsg } from "../../redux/chat.redux";
+
 
 
 
@@ -17,9 +19,17 @@ function Msg(params) {
 
 
 @connect(
-    state => state
+    state => state,
+    {
+        getMsgList, 
+        recvMsg
+    }
 )
 class Dashboard extends Component {
+    componentWillMount(){
+        this.props.getMsgList()
+        this.props.recvMsg()
+    }
     render() {
         const { pathname } = this.props.location;
         const user = this.props.user;
