@@ -27,8 +27,10 @@ function Msg(params) {
 )
 class Dashboard extends Component {
     componentWillMount(){
-        this.props.getMsgList()
-        this.props.recvMsg()
+        if(!this.props.chat.chatmsg.length){
+            this.props.getMsgList()
+            this.props.recvMsg()
+        }
     }
     render() {
         const { pathname } = this.props.location;

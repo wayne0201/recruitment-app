@@ -13,3 +13,7 @@ export function getRedirectPath({ type, avatar}) {
 export function randomKey() {
     return Math.random().toString(36).substring(2);
 }
+
+export function getChatId(userId, targetId){
+    return [userId, targetId].sort().join('_');
+}
