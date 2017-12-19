@@ -6,7 +6,7 @@ const socket = io('ws://localhost:9000');
 
 const MSG_LIST = 'MSG_LIST';
 const MSG_RECV = 'MSG_RECV';
-const MSG_READ = 'MSG_READ';
+// const MSG_READ = 'MSG_READ';
 
 const initState = {
     chatmsg: [],
