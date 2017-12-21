@@ -2,14 +2,15 @@ import React from "react";
 import { List, InputItem, NavBar, Icon, Grid } from "antd-mobile";
 import { randomKey, getChatId } from "../../util";
 import { connect } from "react-redux";
-import { getMsgList, sendMsg, recvMsg } from "../../redux/chat.redux";
+import { getMsgList, sendMsg, recvMsg, readMsg } from "../../redux/chat.redux";
 
 @connect(
     state => state,
     {   
         getMsgList,
         sendMsg,
-        recvMsg
+        recvMsg,
+        readMsg
     }
 )
 class Chat extends React.Component{
@@ -26,6 +27,10 @@ class Chat extends React.Component{
             this.props.recvMsg()
         }
         this.fixCarousel();
+    }
+    componentWillUnmount(){
+        const to = this.props.match.params.user;
+        this.props.readMsg(to);
     }
     fixCarousel() {
         setTimeout(() => {
@@ -69,6 +74,7 @@ class Chat extends React.Component{
                 </NavBar>  
                 {
                     chatmsgs.map(v => {
+
                         const avatar = require(`../img/${users[v.from].avatar}.png`);
                         return v.from === userId ? (
                             <List key={randomKey()}>
